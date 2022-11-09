@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js">  
+    </script>
+    <body>
+        <div ng-app="myapp" ng-controller="myctrl">
+            <form onsubmit="return send()">
+                <table>
+                <tr><td>Student Name <input type="text" ng-model="name"></td></tr>
+                <tr><td>Roll No <input type="text" ng-model="rollno"></td></tr>
+                <tr><td>Batch <input type="text" ng-model="batch"></td></tr>
+                <tr><td>Year <input type="text" ng-model="year"></td></tr>
+                <tr><td> Skills:
+                    <ul>
+                        <li ng-repeat="x in skills">{{x}}</li>
+                    </ul><br>
+                </td></tr>
+                <tr><td><input type="submit" value="submit"></td></tr>
+                </table>
+            </form>
+        </div>
+        <script>
+            var app = angular.module("myapp",[]);
+            app.controller("myctrl",function($scope){
+                $scope.name="charvee";
+                $scope.rollno="20";
+                $scope.batch="Btech";
+                $scope.year="3rd";
+                $scope.skills=['HTML','CSS','nodejs','angularjs'];
+            });
+            function send(){
+                alert("Form data submitted")
+            }
+        </script>
+    </body>
+</html>

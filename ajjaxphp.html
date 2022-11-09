@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<head>
+</head>
+<body>
+    <form onsubmit="return Info()" align="center">
+        <h1>Form Submission using Ajax</h1>
+        <div class="container">
+            <div class="selectbox">
+                <label for="username">Username:</label>
+                <input class="selectbox1" type="text" id="username" name="username">
+            </div><br>
+            <div class="selectbox">
+            <label for="username">Password:</label>
+            <input class="selectbox1" type="password" id="pwd" name="pwd">
+            </div><br>
+            <div class="selectbox">
+                <label for="">Degree:</label>
+                <select class="selectbox1"  id="degree" onchange="myfun(this.value)">
+                <option>B.Tech</option>
+                <option>MBA.Tech</option>
+                </select>
+            </div><br>
+            <div class="selectbox">
+                <label>Choose Class:</label>
+                <select class="selectbox1" id="class">
+                <option>Select Class</option>
+                </select>
+            </div>
+        </div><br>
+        <div>
+            <input class="selectbox1" type="submit" value="submit" class="btn" onclick="insert()"/>
+        </div>
+    </form>
+    <script>
+        function myfun(data){
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("GET","http://localhost//mycourse.php?datavalue="+data,true);
+            xhttp.send();
+            xhttp.onreadystatechange =function(){
+                if(xhttp.readyState == 4 && xhttp.status ==200){
+                    document.getElementById("class").innerHTML = xhttp.responseText;
+                }
+            }  
+        }
+    </script>
+</body>

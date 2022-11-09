@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script> 
+<body ng-app="myApp" ng-controller="orderFormController">
+    <form>
+        <h3>SERVICES</h3>
+        <ul>
+            <li ng-repeat="x in services" ng-click="toggleActive(x)" ng-class="{active:x.active}" style="cursor: pointer;">
+                {{x.name}} <span>{{x.price | currency}}</span>
+            </li>
+        </ul>
+        <div class="total">
+            total:<span>{{total() | currency}}</span>
+        </div>
+    </form>
+<script type="text/javascript">
+      var app = angular.module("myApp",[]);
+      app.controller('orderFormController',function($scope){
+        $scope.services =[
+            {
+                name:'Tutorials Development',
+                price:500,
+                active:true
+            },
+            {
+                name:'Tutorials Design',
+                price:300,
+                active:false
+            },
+            {
+                name:'Code Integration',
+                price:250,
+                active:false
+            },
+            {
+                name:'Training',
+                price:220,
+                active:false
+            }
+        ];
+     $scope.total = function(){
+        var total=0;
+        angular.forEach($scope.services,function(s){
+            if(s.active){
+                total+=s.price;
+            }
+        });
+        return total;
+     };
+     $scope.toggleActive = function(s){
+        s.active=!s.active;
+     };  
+      });
+</script>
+</html>

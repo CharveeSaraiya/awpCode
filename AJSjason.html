@@ -1,0 +1,51 @@
+<html lang="en">
+<head>
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+<body ng-app="myApp">
+    <center>
+        <div ng-controller="myCtrl">
+            <h1>Employee Table</h1>
+            <select ng-model="selection">
+                <option value="+name">ASC Name</option>   
+                <option value="-name">DESC Name</option>
+                <option value="+salary">ASC Sal</option>
+                <option value="-salary">Desc Sal</option>
+                <option value="+DOB">ASC DOB</option>
+                <option value="-DOB">Desc DOB</option>
+            </select><br>
+        <table border=1>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>DOB</th>
+                    <th>Gender</th>
+                    <th>Salary</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="x in employee|orderBy:selection">
+                    <td>{{x.name}}</td>
+                    <td>{{x.DOB|date:"dd/MM/yyyy"}}</td>
+                    <td>{{x.Gender}}</td>
+                    <td>{{x.salary}}</td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </center>
+   <script>
+    app=angular.module("myApp",[]);
+    app.controller("myCtrl",function($scope){
+     var employee=[
+        {name:"Ben",DOB:new Date("23 Nov 1980"),Gender:"Male",salary:55000},
+        {name:"Mark",DOB:new Date("15 Aug 1974"),Gender:"Male",salary:57000},
+        {name:"Pem",DOB:new Date("27 Nov 1979"),Gender:"Female",salary:53000},
+        {name:"Sara",DOB:new Date("5 May 1970"),Gender:"Female",salary:68000},
+     ];
+     $scope.employee=employee;
+    });
+    </script>
+</body>
+</html>

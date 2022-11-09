@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    </head>
+    <body ng-app="myApp" ng-controller="myCtrl">
+        <center>
+            <h1>Income Tax Calculator</h1>
+        </center>
+
+     <div>
+        <table border="1">
+            <form name="myform">
+                <thead>
+                    <tr>
+                        <th>Fields</th>
+                        <th>Input</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><label>Name:</label></td>
+                        <td><input type="text" ng-model="name" required></td>
+                    </tr>
+                    <tr>
+                        <td><label>Gross Total Income:</label></td>
+                        <td><input type="text" ng-model="totalinc" required></td>
+                    </tr>
+                    <tr>
+                        <td><label>Deduction:</label></td>
+                        <td><input type="text" ng-model="ded" name="ded" max="150000" required><br>
+                        <p ng-show="myform.ded.$error.max">Investment should be less than 1.5 lacks</p>
+                        </td>
+                    </tr>
+                    <tr>
+                    <td><button ng-click="userDetail()" ng-diabled="!myform.$valid" style="background-color:#ff0000; color:white;"><b>Calculate</b></button></td>
+                    <td><button ng-click="reset()" style="background-color:#ff0000; color:white;"><b>Reset</b></button></td>
+                    </tr>
+                </tbody>
+            </form>
+        </table>
+     </div>
+     <h2 ng-show="display">Dear, {{name}} your investment amount is {{ded}} and your Tax Payable Amount is {{tax_payable}}</h2>
+    </body>
+    <script>
+        var myApp = angular.module("myApp",[]);
+        myApp.controller("myCtrl",function($scope,tax){
+            $scope.userDetail = function(){
+                $scope.display=true;
+                $scope.tax_payable=tax.myFunc($scope.totalinc,$scope.ded);
+            };
+            $scope.reset = function(){
+                $scope.name="";
+                $scope.totalinc="";
+                $scope.ded="";
+                $scope.display=false;
+                $scope.myform.$setPristine();
+            }
+        });
+        myApp.service('tax',function(){
+            this.myFunc = function (income,deductions){
+                net_income=income-deductions-50000;
+                if(net_income<=250000){
+                    return 0;
+                }
+                else if(net_income<=500000){
+                    return net_income*0.05;
+                }
+                else if(net_income<=1000000){
+                    return net_income*0.2;
+                }
+                else if(net_income>1000000){
+                    return net_income*0.3;
+                }
+            }
+        });
+    </script>
+</html>

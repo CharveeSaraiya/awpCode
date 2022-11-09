@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <p id="demo"></p>
+    <script>
+        document.write("1");
+        var table = "";
+        var book_catalog =
+        {
+            "books":[
+                { "name":"Harry Potter","author":"J.k. Rowling","no_of_books":7,"price":100,"genre":"Fantasy Fiction"},
+                { "name":"Nancy Drew","author":"Carolym keene","no_of_books":56,"price":60,"genre":"Mystery"},
+                { "name":"Goosebumps","author":"R.L.Stine","no_of_books":58,"price":80,"genre":"children's Fiction"},
+                { "name":"Hardy Boys","author":"Franklin W.Dixon","no_of_books":3,"price":50,"genre":"Mystery"},
+            ]
+        }
+        var txt="";
+        txt+="<table border='1' style='border:2px solid black'>";
+     for(x in book_catalog.books) 
+     {
+        txt+="<tr>"
+             +"<td>"+ book_catalog.books[x].name +"</td>"
+             +"<td>" + book_catalog.books[x].author + "</td>"
+             +"<td>" + book_catalog.books[x].no_of_books + "</td>"
+             +"<td>" + book_catalog.books[x].price + "</td>"
+             +"<td>" + book_catalog.books[x].genre + "</td>"
+     }  
+     txt += "</table>";
+     document.getElementById("demo").innerHTML = txt;
+    </script>
+    </body>
+</html>

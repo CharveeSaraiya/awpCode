@@ -1,0 +1,54 @@
+-db
+-use Btech
+-db.createCollection("Student")
+-db.student.insertOne({name:"Mike",age:32,class:"CS"})
+-db.student.insertMany([
+{
+name:"Charvee",roll:32,class:"CS"
+},
+{
+name:"Mike",roll:22,class:"CS"
+},
+{
+name:"Charvee_1",roll:32,class:"CS"
+},
+{
+name:"Charvee_2",roll:32,class:"CS"
+}
+])
+-db.student.find()
+-db.student.deleteOne({name:"mike"})
+-db.student.deleteMany({name:"Charvee_1"})
+-db.student.updateOne({name:"Charvee_2"},{$set:{name:"kristina"}})
+TASk-1.2:
+-db
+-use BTech
+-db.createCollection("Learning")
+-db.Learning.insertOne({bookid:1,author:"Smith",bookname:"HTML",Price:450,Status:'A'})
+-db.Learning.insertMany([
+{
+ bookid:2,author:"Charvee",bookname:"It Ends with Us",Price:245,Status:'A'
+},
+{
+ bookid:3,author:"Stephenie Meyer",bookname:"Twilight",Price:200,Status:'A'
+},
+{
+ bookid:4,author:"Paulo Coelho",bookname:"The Alchemist",Price:399,Status:'A'
+}
+])
+-db.Learning.find()
+-db.Learning.deleteOne({author:"Smith"})
+-db.Learning.deleteMany({Price:200})
+-db.Learning.updateOne({author:"Charvee"},{$set:{author:"Collen Hoover"}})
+-db.Learning.drop()
+
+//query to display aggregate total price by book status
+
+db.Learning.aggregate([
+{$match:{Status:'A'}},
+{$group:{_id:"$author", total:{$sum:"$price"}}}
+])
+
+
+npm install mongodb
+

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0"> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <title>AngularJS Form Validation</title>
+</head>
+<style>
+    #theform.ng-pristine{
+        background-color:rgb(75, 72, 72);
+        width:45%;
+        margin-left:350px;
+        border:4px solid black;
+    }
+    #theform.ng-dirty{
+        background-color: rgb(75, 72, 72);
+        width:45%;
+        margin-left:350px;
+        border:4px solid black;
+    }
+    input.ng-invalid{
+        background-color:rgb(245, 77, 77);
+        color:yellow;
+    }
+    input.ng-valid{
+        background-color:rgb(245, 77, 77);
+        color: black;
+    }
+</style>
+<body ng-app="">
+    <div>
+        <center>
+        <form action="" align="center" name="myform" id="theform" autocomplete="on">
+            <h1>Student Register </h1>
+            <h4>Charvee Saraiya</h4>
+
+        <label for="">First Name</label><br>
+        <input type="text" required ng-minlength="3" ng-max-length="18" name="myfirstname" ng-model="myfirstname"><br>
+        <span ng-show="myform.myfirstname.$touched">
+            <span ng-show="myform.myfirstname.$error.required">
+                <h3>This field is required</h3>
+            </span>
+            <span ng-show="myform.myfirstname.$error.minlength">
+                <h3>Please enter a bigger first Name.</h3>
+            </span>
+            <span ng-show="myform.myfirstname.$error.max-length">
+                <h3>Please enter a smaller firstname</h3>
+            </span>
+        </span>
+        <br>
+
+        <label for="">Last Name</label><br>
+        <input type="text" ng-maxlength="18" name="mylastname" ng-model="mylastname" required>
+            <span ng-show="myform.mylastname.$touched">
+                <span ng-show="myform.mylastname.$error.required">
+                    <h3>This field is required.</h3>
+                </span>
+                <span ng-show="myform.mylastname.$error.maxlength">
+                    <h3>Please enter a smaller Last Name</h3>
+                </span>
+            </span>
+        <br><br>
+
+        <label>Age</label><br>
+        <input type="number" name="age" ng-model="age" ng-pattern="/^(?:1[8-9]|[2-9][0-9])$/" required />
+        <span ng-show="myform.age.$touched">
+               <span ng-show="myform.age.$error.required">Age is required</span>
+               <span ng-show="myform.age.$error.pattern"> Age should be greater than 18</span>
+        </span><br>
+
+        <label for="">Email<span>*</span></label><br>
+        <input type="email" required name="mymail" ng-model="mymail">
+        <span ng-show="myform.mymail.$touched">
+            <span ng-show="!myform.mymail.$valid">
+                <h3> Please Enter a valid email ID.</h3>
+            </span>
+        </span><br>
+
+        <label for="">Password<span>*</span></label><br>
+        <input type="password" ng-minlength="8" required name="mypassword" ng-model="mypassword">
+        <span ng-show="myform.mypassword.$touched">
+            <span ng-show="myform.mypassword.$error.minlength">
+                <h3>Please Enter a password which is more than 8 characters.</h3>
+            </span>
+            <span ng-show="myform.mypassword.$error.required">
+                <h3> Please Enter a Password</h3>
+            </span>
+        </span><br>
+
+        <label for="">Phone Number</label><br>
+        <input type="number" ng-minlength="10" ng-maxlength="10" required name="myphonenumber" ng-model="myphonenumber">
+        <span ng-show="myform.myphonenumber.$touched">
+            <span ng-show="myform.myphonenumber.$error.minlength">
+               <h3>Please Enter 10 digit number</h3>
+            </span>
+            <span ng-show="myform.myphonenumber.$error.maxlength">
+               <h3>Please Enter 10 digit number</h3>
+            </span>
+            <span ng-show="myform.myphonenumber.$error.required">
+                <h3>Please Enter phone number ,it is required</h3>
+            </span>
+        </span><br>
+
+        <button ng-disabled="!myform.$valid">Done</button>
+        <button onclick="window.location.relod();">X Cancel</button>
+</form>
+
+<table align="center" style="margin-left:475px;">
+    <caption>Registered Students</caption>
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Age</th>
+        <th>Phone Number</th>
+    </tr>
+    <tr>
+        <td>{{myfirstname}}</td>
+        <td>{{mylastname}}</td>
+        <td>{{mymail}}</td>
+        <td>{{age}}</td>
+        <td>{{myphonenumber}}</td>
+    </tr>
+</table></center>
+</div>
+</body>
+</html>
+
+
