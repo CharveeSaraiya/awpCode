@@ -1,0 +1,46 @@
+<head>
+    <script>
+  function addstud()
+  {
+ var sname = document.getElementById("sname").value;
+ var fees = document.getElementById("fees").value;
+ var course = document.getElementById("course").value;
+ alert(sname+ ","+fees +","+course);
+  var xhtp;
+  xhtp = new XMLHttpRequest();
+  var data = "sname=" + sname + "&fees="+fees +"&course="+course;
+       xhtp.open("POST", "student_insert.php", true); 
+       xhtp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+       xhtp.send(data);
+     xhtp.onreadystatechange = display_data;
+     
+    function display_data() {
+     if (xhtp.readyState == 4) {
+        if (xhtp.status == 200) {
+         //alert(xhtp.responseText);    
+      document.getElementById("suggestion").innerHTML = xhtp.responseText;
+        } else {
+          alert('There was a problem with the request.');
+        }
+       }
+    }
+  }
+  </script>
+  
+  </head>
+  <body>
+  <form  >
+  
+       
+                
+       Name           <input type="text" id="sname" > <br/>
+       fees           <input type="text" id="fees" > <br/>
+       Course          <input type="text" id="course" > <br/>
+       
+       <button type="button"  onclick="addstud()">Submit</button> 
+       <div id=suggestion></div>
+  </form>
+  </body>
+  </html>
+  
+  

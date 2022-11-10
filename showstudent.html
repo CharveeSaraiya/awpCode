@@ -1,0 +1,36 @@
+<head>
+    <script>
+  var xhtp;
+  xhtp = new XMLHttpRequest();
+        //var data = "pname=" + product;
+        var data="";
+       xhtp.open("POST", "student_display.php", true); 
+       xhtp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+       xhtp.send();
+     xhtp.onreadystatechange = display_data;
+     
+    function display_data() {
+     if (xhtp.readyState == 4) {
+        if (xhtp.status == 200) {
+         //alert(xhtp.responseText);    
+            document.getElementById("suggestion").innerHTML = xhtp.responseText;
+        } else {
+          alert('There was a problem with the request.');
+        }
+       }
+    }
+  
+  </script>
+  
+  </head>
+  <body>
+  <form >
+      <a href="InsertStud.html"> Insert Student </a>
+  <div >
+
+                  <div id="suggestion"></div>
+                 
+  </form>
+  </body>
+  </html>
+  
